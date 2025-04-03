@@ -1,30 +1,47 @@
 package com.example.dummyjson.service;
 
 import com.example.dummyjson.dto.Product;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.dummyjson.dto.ProductResponse;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
+/**
+ * Service layer responsible for managing the retrieval of product-related data.
+ * Communicates with an external API using a WebClient to fetch product details.
+ * Provides methods for retrieving all available products or a specific product by its unique identifier.
+ */
 @Service
 public class ProductService {
 
-    private final String BASE_URL = "https://dummyjson.com/products";
+    private final WebClient webClient;
 
-    @Autowired
-    private RestTemplate restTemplate;
+    public ProductService(WebClient webClient) {
+        this.webClient = webClient;
+    }
 
     public List<Product> getAllProducts() {
-        Product[] products = restTemplate.getForObject(BASE_URL, Product[].class);
-        return Arrays.asList(products);
+        return Optional.ofNullable(
+                        webClient.get()
+                                .uri("/products")
+                                .retrieve()
+                                .bodyToMono(ProductResponse.class)
+                                .block()
+                )
+                .map(ProductResponse::getProducts)
+                .orElseGet(Collections::emptyList);
     }
 
+
     public Product getProductById(Long id) {
-        String url = BASE_URL + "/" + id;
-        return restTemplate.getForObject(url, Product.class);
+        return webClient.get()
+                .uri("/products/{id}", id)
+                .retrieve()
+                .bodyToMono(Product.class)
+                .block();
     }
+
 }
