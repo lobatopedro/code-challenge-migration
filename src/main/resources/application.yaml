@@ -1,2 +1,16 @@
 server:
   port: 8080
+
+# API URL parameterized by environment
+dummyjson-api:
+  base-url: https://dummyjson.com
+
+# Spring Boot Actuator for health check
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: always
