@@ -11,7 +11,7 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 @AutoConfigureWebTestClient
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class ProductControllerTest {
+class ProductControllerTest {
 
     private static final String BASE_URI = "/api/products";
 
@@ -19,7 +19,7 @@ public class ProductControllerTest {
     private WebTestClient webTestClient;
 
     @Test
-    public void testGetAllProducts() {
+    void testGetAllProducts() {
         webTestClient.get()
                 .uri(BASE_URI)
                 .exchange()
@@ -29,7 +29,7 @@ public class ProductControllerTest {
     }
 
     @Test
-    public void testGetProductById() {
+    void testGetProductById() {
         Long productId = 1L;
 
         webTestClient.get()

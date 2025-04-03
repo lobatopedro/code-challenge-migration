@@ -6,10 +6,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @SpringBootTest
-public class ProductTest {
+class ProductTest {
 
     @Test
-    public void testGettersAndSetters() {
+    void testGettersAndSetters() {
         Long expectedId = 1L;
         String expectedTitle = "A dummy title";
         String expectedDescription = "A dummy description";

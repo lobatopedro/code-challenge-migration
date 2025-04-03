@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @AutoConfigureWebTestClient
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class ProductServiceTest {
+class ProductServiceTest {
 
     @Autowired
     private ProductService productService;
@@ -23,7 +23,7 @@ public class ProductServiceTest {
     private WebTestClient webTestClient;
 
     @Test
-    public void testGetAllProducts() {
+    void testGetAllProducts() {
         List<Product> products = productService.getAllProducts();
 
         assertThat(products)
@@ -40,7 +40,7 @@ public class ProductServiceTest {
     }
 
     @Test
-    public void testGetProductById() {
+    void testGetProductById() {
         Long productId = 1L;
 
         Product product = productService.getProductById(productId);

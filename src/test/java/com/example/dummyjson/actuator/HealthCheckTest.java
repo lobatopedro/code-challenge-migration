@@ -25,7 +25,7 @@ import org.springframework.test.web.reactive.server.WebTestClient;
  */
 @AutoConfigureWebTestClient
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class HealthCheckTest {
+class HealthCheckTest {
 
     private static final String HEALTH_ENDPOINT = "/actuator/health";
 
@@ -33,7 +33,7 @@ public class HealthCheckTest {
     private WebTestClient webTestClient;
 
     @Test
-    public void testHealthCheck() {
+    void testHealthCheck() {
         webTestClient.get()
                 .uri(HEALTH_ENDPOINT)
                 .exchange()

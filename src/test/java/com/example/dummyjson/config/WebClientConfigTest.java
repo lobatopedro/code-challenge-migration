@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @SpringBootTest
-public class WebClientConfigTest {
+class WebClientConfigTest {
 
     @Autowired
     private WebClient webClient;
